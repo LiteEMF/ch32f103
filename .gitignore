@@ -39,8 +39,6 @@ JLinkLog.txt
 JLinkSettings.ini
 
 ##########
-
-.vscode/
 *.code-workspace
 *.history/
 
