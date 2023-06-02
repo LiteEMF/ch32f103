@@ -28,7 +28,7 @@ extern "C" {
 
 
 #elif PROJECT_GAMEPAD
-	#if GAMEPAD_C1
+	#if GAMEPAD1
 		// uart
 		#define HW_UART_MAP { \
             {PA_09, (pin_t)PIN_NULL,    0,  0,      (uint32_t)USART1,   0},	\

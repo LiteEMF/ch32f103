@@ -37,9 +37,9 @@ extern "C" {
 
 	/**********************************************************************************/
 
-	#define GAMEPAD_C1						1
+	#define GAMEPAD1						1
 
-	#if GAMEPAD_C1	
+	#if GAMEPAD1	
 		#define APP_KEY_ENABLE			1
 		#define APP_IMU_ENABLE			1
 		#define IMU_SH3001_ID			0
@@ -51,7 +51,7 @@ extern "C" {
 
 
 		#define SW_VERSION                     	0x01
-        #define DEFAULT_NAME			       	"C1"
+        #define DEFAULT_NAME			       	"gamepad"
         #define DEFAULT_MODEL					"GP_dev"
 	#else
 
