@@ -51,7 +51,26 @@
 		"sh3001.h": "c",
 		"hal_gpio.h": "c",
 		"hal_iic_host.h": "c",
-		"cstdlib": "c"
+		"cstdlib": "c",
+		"usb_typedef.h": "c",
+		"usbd_core.h": "c",
+		"usbd.h": "c",
+		"ch32f10x_usb.h": "c",
+		"hal_usbd.h": "c",
+		"ch32f10x_rcc.h": "c",
+		"usb_type.h": "c",
+		"usb_conf.h": "c",
+		"usb_lib.h": "c",
+		"usb_core.h": "c",
+		"usbd_class.h": "c",
+		"ch32f10x.h": "c",
+		"hal_log.h": "c",
+		"usbd_audio.h": "c",
+		"usbd_msd.h": "c",
+		"usbd_iap2.h": "c",
+		"hid_desc_keyboard.h": "c",
+		"app_km.h": "c",
+		"hid_desc_consumer.h": "c"
 	},
 	"files.exclude": {
 		"user/LiteEMF/sample": true

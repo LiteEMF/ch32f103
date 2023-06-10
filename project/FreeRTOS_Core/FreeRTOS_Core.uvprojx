@@ -335,7 +335,7 @@
               <MiscControls></MiscControls>
               <Define></Define>
               <Undefine></Undefine>
-              <IncludePath>..\..\SRC\StdPeriphDriver\inc;..\..\SRC\CMSIS;..\..\SRC\Debug;..\FreeRTOS_Core;.\FreeRTOS\Source\portable;.\FreeRTOS\Source\portable\MemMang;.\FreeRTOS\Source\portable\RVDS\ARM_CM3;.\FreeRTOS\Source\portable\Common;.\FreeRTOS\Source\include;..\..\user;..\..\user\LiteEMF;..\..\user\emf_ch32fxxx_hal</IncludePath>
+              <IncludePath>..\..\SRC\StdPeriphDriver\inc;..\..\SRC\CMSIS;..\..\SRC\Debug;..\FreeRTOS_Core;.\FreeRTOS\Source\portable;.\FreeRTOS\Source\portable\MemMang;.\FreeRTOS\Source\portable\RVDS\ARM_CM3;.\FreeRTOS\Source\portable\Common;.\FreeRTOS\Source\include;..\..\user;..\..\user\LiteEMF;..\..\user\emf_ch32fxxx_hal;..\..\user\emf_ch32fxxx_hal\usb;..\..\user\emf_ch32fxxx_hal\usb\USB-Driver\inc</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -393,6 +393,11 @@
               <FileName>system_ch32f10x.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\system_ch32f10x.c</FilePath>
+            </File>
+            <File>
+              <FileName>gamepad1.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\user\project\gamepad1.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -958,6 +963,21 @@
               <FileName>hal_mem.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\user\emf_ch32fxxx_hal\hal_mem.c</FilePath>
+            </File>
+            <File>
+              <FileName>usb_mem.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\user\emf_ch32fxxx_hal\usb\USB-Driver\src\usb_mem.c</FilePath>
+            </File>
+            <File>
+              <FileName>usb_regs.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\user\emf_ch32fxxx_hal\usb\USB-Driver\src\usb_regs.c</FilePath>
+            </File>
+            <File>
+              <FileName>hal_usbd_ch32dev.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\user\emf_ch32fxxx_hal\usb\hal_usbd_ch32dev.c</FilePath>
             </File>
           </Files>
         </Group>

@@ -1,28 +1,35 @@
 /********************************** (C) COPYRIGHT *******************************
- * File Name          : usb_lib.h
+ * File Name          : usb_mem.h
  * Author             : WCH
  * Version            : V1.0.0
  * Date               : 2019/10/15
- * Description        : Library configuration file for USB.
+ * Description        : This file contains all the functions prototypes for the  
+ *                      USB Initialization firmware library.
 *********************************************************************************
 * Copyright (c) 2021 Nanjing Qinheng Microelectronics Co., Ltd.
 * Attention: This software (modified or not) and binary are used for 
 * microcontroller manufactured by Nanjing Qinheng Microelectronics.
 *******************************************************************************/ 
-#ifndef __USB_LIB_H
-#define __USB_LIB_H
+#ifndef __USB_MEM_H
+#define __USB_MEM_H
 
-#include "usb_type.h"
-#include "usb_regs.h"
-#include "usb_def.h"
-#include "usb_core.h"
-#include "usb_init.h"
-#include "usb_sil.h"
-#include "usb_mem.h"
-#include "usb_int.h"
-#include "ch32f10x_usb.h"
+#ifdef __cplusplus
+ extern "C" {
+#endif
 
-#endif /* __USB_LIB_H */
+#include "ch32f10x.h"
+
+void UserToPMABufferCopy(uint8_t *pbUsrBuf, uint16_t wPMABufAddr, uint16_t wNBytes);
+void PMAToUserBufferCopy(uint8_t *pbUsrBuf, uint16_t wPMABufAddr, uint16_t wNBytes);
+
+
+#ifdef __cplusplus
+}
+#endif
+
+#endif  /*__USB_MEM_H*/
+
+
 
 
 

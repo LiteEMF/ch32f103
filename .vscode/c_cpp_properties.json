@@ -3,8 +3,11 @@
         {
             "name": "Win32",
             "includePath": [
+                "${workspaceFolder}/user/emf_ch32fxxx_hal/",
+                "${workspaceFolder}/user/",
                 "${workspaceFolder}/user/**",
-                "${workspaceFolder}/**"
+                "${workspaceFolder}/project/**",
+                "${workspaceFolder}/SRC/**"
             ],
             "defines": [
                 "_DEBUG",

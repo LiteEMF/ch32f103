@@ -14,7 +14,7 @@
 ************************************************************************************************************/
 #include "hw_config.h"
 #include "hw_board.h"
-#if	defined HW_TIMER_MAP && API_TIMER_ENABLE
+#if	defined HW_TIMER_MAP && API_TIMER_BIT_ENABLE
 #include  "api/api_timer.h"
 
 /******************************************************************************************************
@@ -89,7 +89,7 @@ uint32_t get_timer_id (TIM_TypeDef *ptimer)
 }
 
     
-#if API_TIMER_SUPPORT & BIT(1)
+#if API_TIMER_BIT_ENABLE & BIT(1)
 void TIM1_UP_IRQHandler(void)
 {
 	api_timer_hook(get_timer_id(TIM1));
@@ -97,7 +97,7 @@ void TIM1_UP_IRQHandler(void)
 }
 #endif
 
-#if API_TIMER_SUPPORT & BIT(2)
+#if API_TIMER_BIT_ENABLE & BIT(2)
 void TIM2_IRQHandler(void)
 {
 	api_timer_hook(get_timer_id(TIM2));
@@ -105,7 +105,7 @@ void TIM2_IRQHandler(void)
 }
 #endif
 
-#if API_TIMER_SUPPORT & BIT(3)
+#if API_TIMER_BIT_ENABLE & BIT(3)
 void TIM3_IRQHandler(void)
 {
 	api_timer_hook(get_timer_id(TIM3));
@@ -113,7 +113,7 @@ void TIM3_IRQHandler(void)
 }
 #endif
 
-#if API_TIMER_SUPPORT & BIT(4)
+#if API_TIMER_BIT_ENABLE & BIT(4)
 void TIM4_IRQHandler(void)
 {
 	api_timer_hook(get_timer_id(TIM4));

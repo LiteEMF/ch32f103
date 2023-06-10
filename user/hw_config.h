@@ -49,6 +49,14 @@ extern "C" {
 		#define APP_RGB_NUMS 			3
 		#define API_WDT_ENABLE			1
 
+		#define API_USBD_BIT_ENABLE			BIT(1)
+		#define USBD_NUM					2
+		#define USBD_TYPE_SUPPORT 			BIT_ENUM(DEV_TYPE_HID)
+		#define USBD_HID_SUPPORT			(BIT_ENUM(HID_TYPE_KB) | BIT_ENUM(HID_TYPE_MOUSE) | BIT_ENUM(HID_TYPE_CONSUMER))
+		// #define USBD_HID_SUPPORT			(BIT_ENUM(HID_TYPE_KB))
+
+		#define API_USBH_BIT_ENABLE			0
+
 
 		#define SW_VERSION                     	0x01
         #define DEFAULT_NAME			       	"gamepad"

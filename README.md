@@ -24,7 +24,7 @@ CH32F1系列是基于32位Cortex-M3内核设计的通用微控制器。片上集
  * ADC, IIC, SPI, 都适配了DMA/isr中断方式节约CPU
  * tick 使用的是FreeRTOS系统的tick时钟适配
  * mem动态内存适配的是FreeRTOS系统自带的heap_4
- * usb驱动目前进行中还未完成
+ * usbh驱动目前进行中还未完成
  * DFU升级功能呢目前还未完成
 
 

@@ -191,7 +191,7 @@ bool hal_uart_init(uint8_t id,uint32_t baudrate)
 
 	api_gpio_mode(m_uart_map[id].tx, GPIO_Mode_AF_PP);
     if((pin_t)PIN_NULL != m_uart_map[id].rx){
-	    api_gpio_mode(m_uart_map[id].rx, GPIO_Mode_IN_FLOATING);
+	    api_gpio_mode(m_uart_map[id].rx, GPIO_Mode_IPU);
     }
 	RCC_APB2PeriphClockCmd( RCC_APB2Periph_USART1, ENABLE );
 	

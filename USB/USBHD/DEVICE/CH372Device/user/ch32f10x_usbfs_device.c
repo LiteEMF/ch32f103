@@ -71,7 +71,6 @@ void USBHD_Device_Endp_Init( void )
     R8_UEP4_1_MOD = RB_UEP4_TX_EN | RB_UEP1_RX_EN;
     R8_UEP2_3_MOD = RB_UEP2_TX_EN | RB_UEP3_RX_EN;
 
-    pEP0_RAM_Addr = USBHD_EP0_Buf;
     R16_UEP0_DMA = (uint16_t)(uint32_t)USBHD_EP0_Buf;
 
     R16_UEP1_DMA = (uint16_t)(uint32_t)Data_Buffer;
