@@ -63,7 +63,6 @@ uint8x_t Ep3Buffer[(64 + 2) * 2] _at_(0x80 + (64 + 2) + (64 + 2) * 6); // 端点
  */
 void USBHD_RCC_Init(void)
 {
-    RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA, ENABLE);
     RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOB, ENABLE);
     EXTEN->EXTEN_CTR |= EXTEN_USBHD_IO_EN;
     if( SystemCoreClock == 72000000 )

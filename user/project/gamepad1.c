@@ -73,14 +73,17 @@ bool rgb_driver_deinit(void)
 void hw_user_vender_init(void)
 {
     uint8_t id;
-
+	
+	#if API_USBD_BIT_ENABLE
 	for(id=0; id<USBD_NUM; id++){
 		m_usbd_types[id] = USBD_TYPE_SUPPORT;
         m_usbd_hid_types[id] = USBD_HID_SUPPORT;
 	}
+	#endif
+	
+    // api_gpio_dir(PB_09,PIN_OUT,PIN_PULLNONE);       //TODO
+	// api_gpio_out(PB_09,1);
 
-    
-    
 
     logd("call hw_user_vender_init ok\n" );
 
@@ -136,7 +139,7 @@ void user_vender_handler(void)
 
 
     //use test
-
+	#if API_USBD_BIT_ENABLE
     if(m_systick - timer >= 3000){
         timer = m_systick;
 
@@ -144,8 +147,8 @@ void user_vender_handler(void)
 
         usbd_dev_t *pdev = usbd_get_dev(usb_id);
 
-        logd("pdev->ready=%d\n",pdev->ready);
-        if(pdev->ready){
+        // logd("pdev->ready=%d\n",pdev->ready);
+        if(pdev->ready && 0){
             static kb_t kb={KB_REPORT_ID,0};
             static mouse_t mouse={MOUSE_REPORT_ID,0};
 
@@ -167,6 +170,7 @@ void user_vender_handler(void)
             api_transport_tx(&handle,&mouse,sizeof(mouse));
         }
     }
+	#endif
 
 }
 

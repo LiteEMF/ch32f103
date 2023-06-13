@@ -27,6 +27,7 @@ extern "C" {
 ** Defined
 *******************************************************************************************************/
 //for regest sync
+#ifndef UEP0_CTRL
 #define UEP0_CTRL	R8_UEP0_CTRL
 #define UEP1_CTRL	R8_UEP1_CTRL
 #define UEP2_CTRL	R8_UEP2_CTRL
@@ -151,9 +152,9 @@ extern "C" {
 #define bUC_RESET_SIE     RB_UC_RESET_SIE      // force reset USB SIE, need software clear
 #define bUC_CLR_ALL       RB_UC_CLR_ALL      // force clear FIFO and count of USB
 #define bUC_DMA_EN        RB_UC_DMA_EN      // DMA enable and DMA interrupt enable for USB
+#endif
 
-
-#if (1 == API_USBD_BIT_ENABLE)   
+#if (BIT(1) == API_USBD_BIT_ENABLE)   
 #define USBD_ENDP_NUM			8
 #endif
 

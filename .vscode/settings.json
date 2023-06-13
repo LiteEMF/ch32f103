@@ -70,7 +70,18 @@
 		"usbd_iap2.h": "c",
 		"hid_desc_keyboard.h": "c",
 		"app_km.h": "c",
-		"hid_desc_consumer.h": "c"
+		"hid_desc_consumer.h": "c",
+		"usbh.h": "c",
+		"usbh_class.h": "c",
+		"usbh_core.h": "c",
+		"hal_usbh.h": "c",
+		"app_gamepad.h": "c",
+		"xbox_typedef.h": "c",
+		"switch_typedef.h": "c",
+		"ps_typedef.h": "c",
+		"km_typedef.h": "c",
+		"usbd_socket.h": "c",
+		"hid_dev_desc.h": "c"
 	},
 	"files.exclude": {
 		"user/LiteEMF/sample": true
