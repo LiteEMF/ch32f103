@@ -114,7 +114,7 @@ void USBHD_IRQHandler( void )
             }
             break;
         case UIS_TOKEN_SETUP: // SETUP
-            UEP0_CTRL = RB_UEP_R_TOG | RB_UEP_T_TOG | UEP_R_RES_NAK | UEP_T_RES_NAK;
+            UEP0_CTRL = bUEP_R_TOG | bUEP_T_TOG | UEP_R_RES_NAK | UEP_T_RES_NAK;
             len = USB_RX_LEN;
             if (len == sizeof(usb_control_request_t)) {
                 UEP0_T_LEN = 0;
@@ -460,7 +460,7 @@ error_t hal_usbd_in(uint8_t id, uint8_t ep, uint8_t* buf, uint16_t len)
     error_t err = ERROR_FAILE;
     uint8_t ep_addr = ep & 0x7f;
     uint16_t send_len;
-    uint8_t* endp_buf = hal_usbd_get_endp_buffer(USBD_ID, USB_DIR_IN_MASK | ep);
+    uint8_t* endp_buf = hal_usbd_get_endp_buffer(id, USB_DIR_IN_MASK | ep);
 
     if (USBD_ID != id) return ERROR_FAILE;
 

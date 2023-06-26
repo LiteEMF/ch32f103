@@ -134,7 +134,7 @@ void TIM4_IRQHandler(void)
 ** Returns:	
 ** Description:		
 *******************************************************************/
-bool hal_timer_init(uint8_t id,uint32_t us)
+bool hal_timer_init(uint8_t id)
 {
 	NVIC_InitTypeDef NVIC_InitStructure = {0};
 	TIM_TypeDef *timer = (TIM_TypeDef*)m_timer_map[id].peripheral;

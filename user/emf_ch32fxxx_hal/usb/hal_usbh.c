@@ -17,6 +17,7 @@
 #include  "api/usb/usb_typedef.h"
 #include  "api/usb/host/usbh.h"
 #include  "api/api_tick.h"
+#include  "api/api_system.h"
 
 #include "api/api_log.h"
 
@@ -25,22 +26,7 @@
 *******************************************************************************************************/
 #define USBH_ID 	(0<<4)
 
-
-/* USB Host Port General Control */
-#define DEF_TOTAL_ROOT_HUB          1
-#define DEF_USB_PORT_HD_EN          1
-#define DEF_USB_PORT_HD             0x00
-
-/* USB Device Address */
-#define USB_DEVICE_ADDR             0x02
-
     
-/* Configuration Descriptor Type */
-#define DEF_DECR_CONFIG             0x02
-#define DEF_DECR_INTERFACE          0x04
-#define DEF_DECR_ENDPOINT           0x05
-#define DEF_DECR_HID                0x21
-
 /* USB Communication Status Code */
 #define ERR_SUCCESS                 0x00
 #define ERR_USB_CONNECT             0x15
@@ -51,23 +37,12 @@
 #define ERR_USB_UNSUPPORT           0xFB
 #define ERR_USB_UNAVAILABLE         0xFC
 #define ERR_USB_UNKNOWN             0xFE
-
-/* USB Device Enumeration Status Code */
-#define DEF_DEV_DESCR_GETFAIL       0x45
-#define DEF_DEV_ADDR_SETFAIL        0x46
-#define DEF_CFG_DESCR_GETFAIL       0x47
-#define DEF_REP_DESCR_GETFAIL       0x48    
-#define DEF_DEV_TYPE_UNKNOWN        0xFF
-                       
+                
 /* USB Communication Time */
 #define DEF_BUS_RESET_TIME          11          // USB bus reset time
 #define DEF_RE_ATTACH_TIMEOUT       100         // Wait for the USB device to reconnect after reset, 100mS timeout
 #define DEF_WAIT_USB_TOUT_200US     1000
 #define DEF_CTRL_TRANS_TIMEOVER_CNT 60000       // Control transmission delay timing
-
-/* General */
-#define DEF_NEXT_HUB_PORT_NUM_MAX   1
-#define DEF_COM_BUF_LEN             255
 
 
 /******************************************************************************************************
@@ -313,7 +288,7 @@ uint8_t USBHDH_Transact( uint8_t endp_pid, uint8_t endp_tog, uint32_t timeout )
         R8_USB_INT_FG = RB_UIF_TRANSFER; // Allow transmission
         for( i = DEF_WAIT_USB_TOUT_200US; ( i != 0 ) && ( ( R8_USB_INT_FG & RB_UIF_TRANSFER ) == 0 ); i-- )
         {
-            delay_us( 40 );     //TODO 40
+            delay_us( 40 );
         }
         R8_UH_EP_PID = 0x00; // Stop USB transfer
 
@@ -552,7 +527,6 @@ uint8_t USBHDH_SendEndpData( uint8_t endp_num, uint8_t *pendp_tog, uint8_t *pbuf
 ** Returns:	
 ** Description:		
 *******************************************************************/
-
 error_t hal_usbh_port_en(uint8_t id,uint8_t en, usb_speed_t* pspeed)
 {
     uint8_t i,s;
@@ -585,6 +559,7 @@ error_t hal_usbh_port_reset(uint8_t id)
 	USBHDH_ResetRootHubPort(0);
 	return ERROR_SUCCESS;
 }
+
 error_t hal_usbh_set_speed(uint8_t id, usb_speed_t speed)
 {
 	USBHDH_SetSelfSpeed(speed);
@@ -617,6 +592,7 @@ error_t hal_usbh_ctrl_transfer( uint8_t id, usb_control_request_t* preq,uint8_t*
     err =  err ?  ERROR_FAILE: ERROR_SUCCESS;
 	return err;
 }
+
 error_t hal_usbh_in(uint8_t id, usb_endp_t *endpp, uint8_t* buf,uint16_t* plen,uint16_t timeout_ms)
 {
     error_t err;

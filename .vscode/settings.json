@@ -81,7 +81,13 @@
 		"ps_typedef.h": "c",
 		"km_typedef.h": "c",
 		"usbd_socket.h": "c",
-		"hid_dev_desc.h": "c"
+		"hid_dev_desc.h": "c",
+		"hid_typedef.h": "c",
+		"emf_error.h": "c",
+		"stddef.h": "c",
+		"compiler_abstraction.h": "c",
+		"io_key.h": "c",
+		"key_typedef.h": "c"
 	},
 	"files.exclude": {
 		"user/LiteEMF/sample": true
