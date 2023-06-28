@@ -13,7 +13,7 @@
 **	Description:	
 ************************************************************************************************************/
 #include "hw_config.h"
-
+#if (API_USBH_BIT_ENABLE)   
 #include  "api/usb/usb_typedef.h"
 #include  "api/usb/host/usbh.h"
 #include  "api/api_tick.h"
@@ -584,10 +584,10 @@ error_t hal_usbh_endp_register(uint8_t id,usb_endp_t *endpp)
 }
 error_t hal_usbh_ctrl_transfer( uint8_t id, usb_control_request_t* preq,uint8_t* buf, uint16_t* plen)
 {
-    uint8_t err;
+    error_t err;
     usbh_dev_t* pdev = get_usbh_dev(id);
 
-    err = USBHDH_CtrlTransfer( pdev->endp0_mtu,  (USB_SETUP_REQ *)preq, buf, plen );
+    err = (error_t)USBHDH_CtrlTransfer( pdev->endp0_mtu,  (USB_SETUP_REQ *)preq, buf, plen );
 
     err =  err ?  ERROR_FAILE: ERROR_SUCCESS;
 	return err;
@@ -599,7 +599,7 @@ error_t hal_usbh_in(uint8_t id, usb_endp_t *endpp, uint8_t* buf,uint16_t* plen,u
     uint8_t tog = endpp->sync? RB_UH_R_TOG : 0;
     uint8_t endp_num = endpp->addr;
 
-    err = USBHDH_GetEndpData(endp_num, &tog, buf, plen );
+    err = (error_t)USBHDH_GetEndpData(endp_num, &tog, buf, plen );
     endpp->sync = BOOL_SET(tog);
 
     err =  err ?  ERROR_FAILE: ERROR_SUCCESS;
@@ -611,7 +611,7 @@ error_t hal_usbh_out(uint8_t id, usb_endp_t *endpp, uint8_t* buf, uint16_t len)
     uint8_t tog = endpp->sync? RB_UH_T_TOG : 0;
     uint8_t endp_num = endpp->addr;
 
-    err = USBHDH_SendEndpData( endp_num, &tog, buf, len );
+    err = (error_t)USBHDH_SendEndpData( endp_num, &tog, buf, len );
     err =  err ?  ERROR_FAILE: ERROR_SUCCESS;
 
 	return err;
@@ -634,6 +634,7 @@ void hal_usbh_driver_task(uint32_t dt_ms)
 	USBHDH_CheckRootHubPortStatus();
 }
 
+#endif
 
 
 

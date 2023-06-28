@@ -87,7 +87,8 @@
 		"stddef.h": "c",
 		"compiler_abstraction.h": "c",
 		"io_key.h": "c",
-		"key_typedef.h": "c"
+		"key_typedef.h": "c",
+		"usbd_msd_ram_disk.h": "c"
 	},
 	"files.exclude": {
 		"user/LiteEMF/sample": true

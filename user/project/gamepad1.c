@@ -139,7 +139,7 @@ void user_vender_handler(void)
 
 
     //use test
-	#if API_USBD_BIT_ENABLE
+	#if API_USBD_BIT_ENABLE && (USBD_HID_SUPPORT & (BIT_ENUM(HID_TYPE_KB) | BIT_ENUM(HID_TYPE_MOUSE) | BIT_ENUM(HID_TYPE_CONSUMER)))
     if(m_systick - timer >= 3000){
         timer = m_systick;
 
@@ -148,7 +148,7 @@ void user_vender_handler(void)
         usbd_dev_t *pdev = usbd_get_dev(usb_id);
 
         // logd("pdev->ready=%d\n",pdev->ready);
-        if(pdev->ready && 0){
+        if(pdev->ready){
             static kb_t kb={KB_REPORT_ID,0};
             static mouse_t mouse={MOUSE_REPORT_ID,0};
 

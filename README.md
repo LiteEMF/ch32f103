@@ -26,11 +26,13 @@ CH32F1系列是基于32位Cortex-M3内核设计的通用微控制器。片上集
  * mem动态内存适配的是FreeRTOS系统自带的heap_4
  * usbh驱动目前进行中还未完成
  * DFU升级功能呢目前还未完成
+ * api_flash.c 读取接口未适配完成(需要支持任意位置读取)
 
 
 ## 快速开始
 
-* 下载项目 `git clone https://github.com/LiteEMF/ch32f103`
+* 下载项目git命令行下载 `git clone https://github.com/LiteEMF/ch32f103`
+* 更新LiteEMF子模块命令行输入: `git submodule init`  `git submodule update`
 * 安装 keil5, 安装[Keil.WCH32F1xx_DFP.1.0.1.pack](/Keil.WCH32F1xx_DFP.1.0.1.pack)芯片支持
 * keil 打开 ch32f103\project\project.uvprojx 编译
 * 通过下载工具[WCHISPTool_Setup.exe](https://www.wch.cn/downloads/WCHISPTool_Setup_exe.html) usb/uart下载
