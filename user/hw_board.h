@@ -81,12 +81,12 @@ extern "C" {
         #define ADC_L2_ID		4
         #define ADC_R2_ID		5
         #define HW_ADC_MAP      {\
-            {PC_01  , 0UL,VAL2FLD(ADC_CHANNEL,ADC_Channel_11)},\
-            {PC_02  , 0UL,VAL2FLD(ADC_CHANNEL,ADC_Channel_12)},\
-            {(pin_t)PIN_NULL  , 0UL,VAL2FLD(ADC_CHANNEL,ADC_Channel_7)},\
-            {(pin_t)PIN_NULL  , 0UL,VAL2FLD(ADC_CHANNEL,ADC_Channel_6)},\
-            {PC_03  , 0UL,VAL2FLD(ADC_CHANNEL,ADC_Channel_13)},\
-            {PA_04  , 0UL,VAL2FLD(ADC_CHANNEL,ADC_Channel_4)}\
+            {PC_01  , 0UL,VAL2FLD(ADC_CH,ADC_Channel_11)},\
+            {PC_02  , 0UL,VAL2FLD(ADC_CH,ADC_Channel_12)},\
+            {(pin_t)PIN_NULL  , 0UL,VAL2FLD(ADC_CH,ADC_Channel_7)},\
+            {(pin_t)PIN_NULL  , 0UL,VAL2FLD(ADC_CH,ADC_Channel_6)},\
+            {PC_03  , 0UL,VAL2FLD(ADC_CH,ADC_Channel_13)},\
+            {PA_04  , 0UL,VAL2FLD(ADC_CH,ADC_Channel_4)}\
         }
 
         // #define HW_PWM_MAP {\

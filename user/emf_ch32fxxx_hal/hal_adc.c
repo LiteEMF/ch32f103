@@ -29,12 +29,12 @@
         // #define ADC_L2_ID		4
         // #define ADC_R2_ID		5
         // #define HW_ADC_MAP      {\
-        //     {PC_01  , 0UL,VAL2FLD(ADC_CHANNEL,ADC_Channel_11)},\
-        //     {PC_02  , 0UL,VAL2FLD(ADC_CHANNEL,ADC_Channel_12)},\
-        //     {PA_07  , 0UL,VAL2FLD(ADC_CHANNEL,ADC_Channel_7)},\
-        //     {PA_06  , 0UL,VAL2FLD(ADC_CHANNEL,ADC_Channel_6)},\
-        //     {PC_03  , 0UL,VAL2FLD(ADC_CHANNEL,ADC_Channel_13)},\
-        //     {PA_04  , 0UL,VAL2FLD(ADC_CHANNEL,ADC_Channel_4)}\
+        //     {PC_01  , 0UL,VAL2FLD(ADC_CH,ADC_Channel_11)},\
+        //     {PC_02  , 0UL,VAL2FLD(ADC_CH,ADC_Channel_12)},\
+        //     {PA_07  , 0UL,VAL2FLD(ADC_CH,ADC_Channel_7)},\
+        //     {PA_06  , 0UL,VAL2FLD(ADC_CH,ADC_Channel_6)},\
+        //     {PC_03  , 0UL,VAL2FLD(ADC_CH,ADC_Channel_13)},\
+        //     {PA_04  , 0UL,VAL2FLD(ADC_CH,ADC_Channel_4)}\
         // }
 /******************************************************************************************************
 **	static Parameters
@@ -142,7 +142,7 @@ bool hal_adc_init(void)
 	for(id=0; id < m_adc_num; id++){
 		api_gpio_mode(m_adc_map[id].pin, GPIO_Mode_AIN);
 		//相当于采样一个通道约等于27us 
-		ADC_RegularChannelConfig(ADC1,ADC_CHANNEL_ATT(id) ,id+1, ADC_SampleTime_239Cycles5);  	//设置规则通道 
+		ADC_RegularChannelConfig(ADC1,ADC_CH_ATT(id) ,id+1, ADC_SampleTime_239Cycles5);  	//设置规则通道 
 	}
 
 	ADC_Init(ADC1, &ADC_InitStructure);	 
