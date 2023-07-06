@@ -420,7 +420,7 @@ void CTR_LP(void)
 			
             if ((wIstr & ISTR_DIR) == 0){ // IN
                 _ClearEP_CTR_TX(ENDP0);
-                usbd_endp_in_event(USBD_ID, USB_DIR_IN_MASK | EPindex);
+                usbd_endp_in_event(USBD_ID, TUSB_DIR_IN_MASK | EPindex);
                 // SetEPRxCount(ENDP0, USBD_ENDP0_MTU);
                 return;
             } else {
@@ -452,7 +452,7 @@ void CTR_LP(void)
             }
 
             if ((wEPVal & EP_CTR_TX) != 0) {           //endp tx isr
-                usbd_endp_in_event(USBD_ID, USB_DIR_IN_MASK | EPindex);
+                usbd_endp_in_event(USBD_ID, TUSB_DIR_IN_MASK | EPindex);
                 _ClearEP_CTR_TX(EPindex);
             }
         }
@@ -659,18 +659,18 @@ error_t hal_usbd_endp_open(uint8_t id, usb_endp_t* pendp)
         SetDeviceAddress(0);
     }else if (pendp->dir) {
         switch(pendp->type){
-            case USB_ENDP_TYPE_CTRL:
+            case TUSB_ENDP_TYPE_CTRL:
                 SetEPType(pendp->addr, EP_CONTROL);
             break;
-            case USB_ENDP_TYPE_ISOCH:		//设置为同一个buf
+            case TUSB_ENDP_TYPE_ISOCH:		//设置为同一个buf
                 SetEPType(pendp->addr, EP_ISOCHRONOUS);
                 SetEPRxAddr(pendp->addr, endp_add);
                 SetEPRxCount(pendp->addr, pendp->mtu);
             break;
-            case USB_ENDP_TYPE_BULK:
+            case TUSB_ENDP_TYPE_BULK:
                 SetEPType(pendp->addr, EP_BULK);
             break;
-            case USB_ENDP_TYPE_INTER:
+            case TUSB_ENDP_TYPE_INTER:
                 SetEPType(pendp->addr, EP_INTERRUPT);
             break;
         }
@@ -681,17 +681,17 @@ error_t hal_usbd_endp_open(uint8_t id, usb_endp_t* pendp)
         endp_add += pendp->mtu;
     } else {
         switch(pendp->type){
-            case USB_ENDP_TYPE_CTRL:
+            case TUSB_ENDP_TYPE_CTRL:
                 SetEPType(pendp->addr, EP_CONTROL);
             break;
-            case USB_ENDP_TYPE_ISOCH:		//设置为同一个buf
+            case TUSB_ENDP_TYPE_ISOCH:		//设置为同一个buf
                 SetEPType(pendp->addr, EP_ISOCHRONOUS);
                 SetEPTxAddr(pendp->addr, endp_add);
             break;
-            case USB_ENDP_TYPE_BULK:
+            case TUSB_ENDP_TYPE_BULK:
                 SetEPType(pendp->addr, EP_BULK);
             break;
-            case USB_ENDP_TYPE_INTER:
+            case TUSB_ENDP_TYPE_INTER:
                 SetEPType(pendp->addr, EP_INTERRUPT);
             break;
         }

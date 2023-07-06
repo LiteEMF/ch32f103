@@ -192,7 +192,7 @@ void USBHDH_SetSelfAddr( uint8_t addr )
  */
 void USBHDH_SetSelfSpeed(usb_speed_t speed)
 {
-    if (USB_SPEED_FULL == speed) {       //full speed
+    if (TUSB_SPEED_FULL == speed) {       //full speed
 		R8_USB_CTRL &= ~RB_UC_LOW_SPEED;
 		R8_UHOST_CTRL &= ~RB_UH_LOW_SPEED;
 		R8_UH_SETUP &= ~RB_UH_PRE_PID_EN; 
@@ -217,7 +217,7 @@ void USBHDH_SetSelfSpeed(usb_speed_t speed)
 void USBHDH_ResetRootHubPort(uint8_t mode)
 {
     USBHDH_SetSelfAddr(0x00);
-    USBHDH_SetSelfSpeed(USB_SPEED_FULL);
+    USBHDH_SetSelfSpeed(TUSB_SPEED_FULL);
     if (mode <= 1) {
         R8_UHOST_CTRL = ( R8_UHOST_CTRL & ~RB_UH_LOW_SPEED ) | RB_UH_BUS_RESET;
     }
@@ -250,8 +250,8 @@ uint8_t USBHDH_EnableRootHubPort(uint8_t* pspeed)
     if (R8_USB_MIS_ST & RB_UMS_DEV_ATTACH) {
         if (USBHDH_CheckRootHubPortEnable() == 0x00) {
             *pspeed = USBHDH_CheckRootHubPortSpeed();
-            if (*pspeed == USB_SPEED_LOW) {
-                USBHDH_SetSelfSpeed(USB_SPEED_LOW);
+            if (*pspeed == TUSB_SPEED_LOW) {
+                USBHDH_SetSelfSpeed(TUSB_SPEED_LOW);
             }
         }
 		R8_UHOST_CTRL |= RB_UH_PORT_EN;

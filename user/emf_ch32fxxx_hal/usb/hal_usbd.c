@@ -96,7 +96,7 @@ void USBHD_IRQHandler( void )
         switch (intst & MASK_UIS_TOKEN) {
 
         case UIS_TOKEN_IN:
-            usbd_endp_in_event(USBD_ID, USB_DIR_IN_MASK | ep);
+            usbd_endp_in_event(USBD_ID, TUSB_DIR_IN_MASK | ep);
             if(0 == ep){
                 UEP0_CTRL ^= bUEP_T_TOG; // 同步标志位翻转
             }else if(4 == ep){
@@ -241,7 +241,7 @@ error_t hal_usbd_endp_ack(uint8_t id, uint8_t ep, uint16_t len)
     switch (ep) {
     case 0x80:
         UEP0_T_LEN = len;
-		UEP0_CTRL = (UEP0_CTRL & ~MASK_UEP_T_RES) | UEP_T_RES_ACK;
+        UEP0_CTRL = (UEP0_CTRL & ~MASK_UEP_T_RES) | UEP_T_RES_ACK;
         break;
     case 0x81:
         UEP1_T_LEN = len;
@@ -261,19 +261,19 @@ error_t hal_usbd_endp_ack(uint8_t id, uint8_t ep, uint16_t len)
         break;
         
     case 0x00:
-        UEP0_CTRL = UEP0_CTRL & ~ MASK_UEP_R_RES | UEP_R_RES_ACK;  //重新开启接收
+        UEP0_CTRL = UEP0_CTRL & ~ MASK_UEP_R_RES | UEP_R_RES_ACK;  //out ack
         break;
     case 0x01:
-        UEP1_CTRL = UEP1_CTRL & ~ MASK_UEP_R_RES | UEP_R_RES_ACK;  //重新开启接收
+        UEP1_CTRL = UEP1_CTRL & ~ MASK_UEP_R_RES | UEP_R_RES_ACK;  //out ack
         break;
     case 0x02:
-        UEP2_CTRL = UEP2_CTRL & ~ MASK_UEP_R_RES | UEP_R_RES_ACK;  //重新开启接收
+        UEP2_CTRL = UEP2_CTRL & ~ MASK_UEP_R_RES | UEP_R_RES_ACK;  //out ack
         break;
     case 0x03:
-        UEP3_CTRL = UEP3_CTRL & ~ MASK_UEP_R_RES | UEP_R_RES_ACK;  //重新开启接收
+        UEP3_CTRL = UEP3_CTRL & ~ MASK_UEP_R_RES | UEP_R_RES_ACK;  //out ack
         break;
     case 0x04:
-        UEP4_CTRL = UEP4_CTRL & ~ MASK_UEP_R_RES | UEP_R_RES_ACK;  //重新开启接收
+        UEP4_CTRL = UEP4_CTRL & ~ MASK_UEP_R_RES | UEP_R_RES_ACK;  //out ack
         break;
     default:
         break;
@@ -470,7 +470,7 @@ error_t hal_usbd_in(uint8_t id, uint8_t ep, uint8_t* buf, uint16_t len)
     error_t err = ERROR_FAILE;
     uint8_t ep_addr = ep & 0x7f;
     uint16_t send_len;
-    uint8_t* endp_buf = hal_usbd_get_endp_buffer(id, USB_DIR_IN_MASK | ep);
+    uint8_t* endp_buf = hal_usbd_get_endp_buffer(id, TUSB_DIR_IN_MASK | ep);
 
     if (USBD_ID != id) return ERROR_FAILE;
 
@@ -484,11 +484,9 @@ error_t hal_usbd_in(uint8_t id, uint8_t ep, uint8_t* buf, uint16_t len)
             preq->setup_index += send_len;
 
             err = hal_usbd_endp_ack(id, ep, send_len);
-            if((preq->setup_index == preq->setup_len)){
-                if(USBD_ENDP0_MTU != send_len){             //判断发送最后一包数据
-                    usbd_free_setup_buffer(preq);           //发送完成释放内存
-                    hal_usbd_endp_ack(id, 0x00, 0);         //开始接收
-                }
+            if(USBD_ENDP0_MTU != send_len){             //判断发送最后一包数据
+                usbd_free_setup_buffer(preq);           //发送完成释放内存
+                hal_usbd_endp_ack(id, 0x00, 0);         //out ack
             }
         }else{
             return ERROR_FAILE;
