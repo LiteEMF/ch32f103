@@ -12,7 +12,7 @@
 
 #ifndef _hal_iic_h
 #define _hal_iic_h
-#include "utils/emf_typedef.h" 
+#include "emf_typedef.h" 
 #include "hw_config.h"
 #include "hw_board.h"
 

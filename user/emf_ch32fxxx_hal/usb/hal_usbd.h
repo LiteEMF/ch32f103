@@ -12,7 +12,7 @@
 
 #ifndef _hal_usbd_h
 #define _hal_usbd_h
-#include "utils/emf_typedef.h" 
+#include "emf_typedef.h" 
 #include "ch32f10x_usb.h"
 #include "ch32f10x_rcc.h"
 #include "hw_config.h"

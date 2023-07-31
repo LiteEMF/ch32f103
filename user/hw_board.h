@@ -12,7 +12,7 @@
 
 #ifndef _hw_board_h
 #define _hw_board_h
-#include "utils/emf_typedef.h" 
+#include "emf_typedef.h" 
 #include "ch32f10x.h"
 
 #ifdef __cplusplus
