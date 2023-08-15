@@ -63,12 +63,24 @@ bool hal_flash_read(uint16_t offset,uint8_t *buf,uint16_t len)
 {
 	uint32_t i;
 	uint32_t read_buf;
+	uint8_t align = 0, read_len;
 
-	if(offset & 0XFFFC) return false;
+	align = offset & 0x03;
+	offset &= ~0x03UL;
 
-	for(i=0; i<len; i+=4){
+	for(i=0; i<len; ){
 		read_buf =  *( uint32_t * )( (API_FLASH_ADDRESS+offset) + i );
-		memcpy(buf+i, &read_buf, MIN(4, len - i));
+
+		if(align) {
+			read_len = MIN(4 - align, len - i); 
+			memcpy(buf+i, (uint8_t*)&read_buf + align, read_len);
+			align = 0;
+		}else{
+			read_len = MIN(4, len - i);
+			memcpy(buf+i, &read_buf, read_len);
+		}
+
+		i += read_len;
 	}
 
 	return true;
