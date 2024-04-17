@@ -555,7 +555,7 @@ error_t hal_usbd_init(uint8_t id)
     USBHD_RCC_Init();
 
     R8_USB_CTRL = RB_UC_RESET_SIE | RB_UC_CLR_ALL;
-    delay_us( 20 );
+    api_delay_us( 20 );
     R8_USB_CTRL = 0x00; // 先设定模式,取消 RB_UC_CLR_ALL
     USB_INT_EN = RB_UIE_SUSPEND | RB_UIE_BUS_RST | RB_UIE_TRANSFER;
     R8_USB_CTRL = RB_UC_DEV_PU_EN | RB_UC_INT_BUSY | RB_UC_DMA_EN;
@@ -571,7 +571,7 @@ error_t hal_usbd_deinit(uint8_t id)
     if (USBD_ID != id) return ERROR_FAILE;
 
     R8_USB_CTRL = RB_UC_RESET_SIE | RB_UC_CLR_ALL;
-    delay_us( 10 );
+    api_delay_us( 10 );
     R8_USB_CTRL = 0x00; // 先设定模式,取消 RB_UC_CLR_ALL
     UDEV_CTRL = RB_UD_PD_DIS; // 禁止DP/DM下拉电阻
     NVIC_DisableIRQ(USBHD_IRQn);

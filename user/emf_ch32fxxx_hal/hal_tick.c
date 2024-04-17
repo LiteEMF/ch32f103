@@ -60,6 +60,11 @@ void hal_delay_ms(uint32_t ms)
 {
 	hal_delay_us(1000*ms);
 }
+
+void hal_os_delay_ms(uint32_t ms)
+{
+	
+}
 void hal_tick_init(void)
 {	
 }

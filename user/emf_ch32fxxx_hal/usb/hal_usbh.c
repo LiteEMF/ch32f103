@@ -104,7 +104,7 @@ void USBHD_Host_Init( FunctionalState sta )
     {
         /* Reset USB module */
         R8_USB_CTRL = RB_UC_RESET_SIE | RB_UC_CLR_ALL;
-        delay_us( 10 );
+        api_delay_us( 10 );
         R8_USB_CTRL = 0;
         
         /* Initialize USB host configuration */
@@ -116,7 +116,7 @@ void USBHD_Host_Init( FunctionalState sta )
     else
     {
         R8_USB_CTRL = RB_UC_RESET_SIE | RB_UC_CLR_ALL;
-        delay_us( 10 );
+        api_delay_us( 10 );
         R8_USB_CTRL = 0;
     }
 }
@@ -288,7 +288,7 @@ uint8_t USBHDH_Transact( uint8_t endp_pid, uint8_t endp_tog, uint32_t timeout )
         R8_USB_INT_FG = RB_UIF_TRANSFER; // Allow transmission
         for( i = DEF_WAIT_USB_TOUT_200US; ( i != 0 ) && ( ( R8_USB_INT_FG & RB_UIF_TRANSFER ) == 0 ); i-- )
         {
-            delay_us( 40 );
+            api_delay_us( 40 );
         }
         R8_UH_EP_PID = 0x00; // Stop USB transfer
 
@@ -344,10 +344,10 @@ uint8_t USBHDH_Transact( uint8_t endp_pid, uint8_t endp_tog, uint32_t timeout )
                     return ERR_USB_UNKNOWN;
             }
         }
-        delay_us( 15 );
+        api_delay_us( 15 );
         if( R8_USB_INT_ST & RB_UIF_DETECT )
         {
-            delay_us( 200 );
+            api_delay_us( 200 );
             if( USBHDH_CheckRootHubPortEnable( ) == 0 )
             {
                 return ERR_USB_DISCON; // USB device disconnect event
@@ -370,7 +370,7 @@ uint8_t USBHDH_CtrlTransfer( uint8_t ep0_size,  USB_SETUP_REQ *preq, uint8_t *pb
     uint8_t  s;
     uint16_t rem_len, rx_len, rx_cnt, tx_cnt;
 
-    delay_us( 100 );
+    api_delay_us( 100 );
     
     if( plen )
     {
@@ -393,7 +393,7 @@ uint8_t USBHDH_CtrlTransfer( uint8_t ep0_size,  USB_SETUP_REQ *preq, uint8_t *pb
             /* Receive data */
             while( rem_len )
             {
-                delay_us( 100 );
+                api_delay_us( 100 );
                 s = USBHDH_Transact( USB_PID_IN << 4 | 0x00, R8_UH_RX_CTRL, DEF_CTRL_TRANS_TIMEOVER_CNT );  // IN
                 if( s != ERR_SUCCESS )
                 {
@@ -423,7 +423,7 @@ uint8_t USBHDH_CtrlTransfer( uint8_t ep0_size,  USB_SETUP_REQ *preq, uint8_t *pb
             /* Send data */
             while( rem_len )
             {
-                delay_us( 100 );
+                api_delay_us( 100 );
                 R8_UH_TX_LEN = rem_len >= ep0_size ? ep0_size : rem_len;
                 for( tx_cnt = 0; tx_cnt != R8_UH_TX_LEN; tx_cnt++ )
                 {
@@ -443,7 +443,7 @@ uint8_t USBHDH_CtrlTransfer( uint8_t ep0_size,  USB_SETUP_REQ *preq, uint8_t *pb
             }
         }
     }
-    delay_us( 100 );
+    api_delay_us( 100 );
     s = USBHDH_Transact( ( R8_UH_TX_LEN ? USB_PID_IN << 4 | 0x00: USB_PID_OUT << 4 | 0x00 ), RB_UH_R_TOG | RB_UH_T_TOG, DEF_CTRL_TRANS_TIMEOVER_CNT );  /* STATUS�׶� */
     if( s != ERR_SUCCESS )
     {

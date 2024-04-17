@@ -36,12 +36,12 @@ I2C2的TX是通道4，RX是通道5
 
 #define WAIT_CONDITION(x, del)	\
 do{\
-	uint32_t d = del;\
+	uint32_t d = (uint32_t)del;\
 	while( (x) && --d);\
 	if(0 == d){\
 		api_iic_host_isr_hook(iic_current_id,ERROR_TIMEOUT);\
 		if(iic_current_id & 0X80) emf_free(iic_tx_buf);\
-		iic_current_id = ID_NULL;\
+		iic_current_id = (uint8_t)ID_NULL;\
 		return false;\
 	}\
 }while(0)
@@ -55,7 +55,7 @@ do{\
 **	static Parameters
 *******************************************************************************************************/
 #if IIC_ISR_SUPPORT
-volatile uint8_t iic_current_id = ID_NULL;				//bit7: 0: write, 1:read
+volatile uint8_t iic_current_id = (uint8_t)ID_NULL;				//bit7: 0: write, 1:read
 volatile uint8_t iic_current_err = 0;
 uint8_t *iic_tx_buf = NULL;
 
@@ -272,7 +272,7 @@ void i2c_event_irq_handler(I2C_TypeDef *I2Cx)
         I2C_ITConfig(I2Cx, I2C_IT_EVT,DISABLE);
 
 		api_iic_host_isr_hook(iic_current_id,ERROR_SUCCESS);
-		iic_current_id = ID_NULL;
+		iic_current_id = (uint8_t)ID_NULL;
 		iic_current_err = ERROR_SUCCESS;
 		emf_free(iic_tx_buf);
     }
@@ -463,7 +463,7 @@ void i2c_error_irq_handler(I2C_TypeDef *I2Cx)
     I2C_ITConfig(I2Cx, I2C_IT_EVT,DISABLE);
 
 	api_iic_host_isr_hook(iic_current_id,ERROR_FAILE);
-	iic_current_id = ID_NULL;
+	iic_current_id = (uint8_t)ID_NULL;
 	iic_current_err = ERROR_SUCCESS;
 	emf_free((void*)iic_tx_buf);
 	logd("irqerr\n");
@@ -573,7 +573,7 @@ void DMA1_Channel4_IRQHandler()
 		
 		I2C_GenerateSTOP( I2C2, ENABLE );
 		api_iic_host_isr_hook(iic_current_id,ERROR_FAILE);
-		iic_current_id = ID_NULL;
+		iic_current_id = (uint8_t)ID_NULL;
 		iic_current_err = ERROR_FAILE;
 		logd("dma4e\n");
     }
@@ -588,7 +588,7 @@ void DMA1_Channel5_IRQHandler()
 		I2C_GenerateSTOP( I2C2, ENABLE );
 
 		api_iic_host_isr_hook(iic_current_id,ERROR_SUCCESS);
-		iic_current_id = ID_NULL;
+		iic_current_id = (uint8_t)ID_NULL;
 		iic_current_err = ERROR_SUCCESS;
     }
 
@@ -598,7 +598,7 @@ void DMA1_Channel5_IRQHandler()
 		I2C_GenerateSTOP( I2C2, ENABLE );
 
 		api_iic_host_isr_hook(iic_current_id,ERROR_FAILE);
-		iic_current_id = ID_NULL;
+		iic_current_id = (uint8_t)ID_NULL;
 		iic_current_err = ERROR_FAILE;
 		logd("dma5e\n");
     }
@@ -612,6 +612,16 @@ void DMA1_Channel5_IRQHandler()
 **  Function
 ******************************************************************************************************/
 
+/*******************************************************************
+** Parameters:		
+** Returns:	
+** Description:		
+*******************************************************************/
+bool hal_iic_scan_addr(uint8_t id,uint8_t dev_addr)
+{
+	uint8_t ret = false;
+	return ret;
+}
 
 /*******************************************************************
 ** Parameters:		
@@ -628,7 +638,7 @@ bool hal_iic_write(uint8_t id,uint8_t dev_addr,uint16_t addr, uint8_t const *buf
 		ret = hal_iic_isr_write(id, dev_addr, addr, buf, len);
 
 		#if IIC_ISR_DMA_ENABLE
-		while( (ID_NULL != iic_current_id) && --d);
+		while( ((uint8_t)ID_NULL != iic_current_id) && --d);
 		#else
 		while( (i2c_nbytes > 0) && --d);
 		#endif
@@ -637,7 +647,7 @@ bool hal_iic_write(uint8_t id,uint8_t dev_addr,uint16_t addr, uint8_t const *buf
 		if(0 == d){
 			api_iic_host_isr_hook(iic_current_id,ERROR_TIMEOUT);
 			emf_free(iic_tx_buf);
-			iic_current_id = ID_NULL;
+			iic_current_id = (uint8_t)ID_NULL;
 			ret = false;
 		}
 	#endif
@@ -652,7 +662,7 @@ bool hal_iic_read(uint8_t id,uint8_t dev_addr,uint16_t addr, uint8_t* buf, uint1
 		ret = hal_iic_isr_read(id, dev_addr, addr, buf, len);
 
 		#if IIC_ISR_DMA_ENABLE
-		WAIT_CONDITION(ID_NULL != iic_current_id, WAIT_TIME * len);
+		WAIT_CONDITION((uint8_t)ID_NULL != iic_current_id, WAIT_TIME * len);
 		if( ERROR_SUCCESS != iic_current_err) ret = false;
 		#else
 		WAIT_CONDITION((i2c_nbytes > 0), WAIT_TIME * len);

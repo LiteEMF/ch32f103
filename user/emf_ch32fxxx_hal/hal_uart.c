@@ -85,7 +85,7 @@ uint32_t get_uart_id (USART_TypeDef *puart)
         }
     }
 
-    return ID_NULL;
+    return (uint32_t)ID_NULL;
 }
 
 
